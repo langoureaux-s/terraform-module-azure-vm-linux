@@ -1,10 +1,9 @@
-provider "azurerm" {}
-
 terraform {
   # The configuration for this backend will be filled in by Terragrunt
   backend "azurerm" {}
 }
 
+provider "azurerm" {}
 
 resource "azurerm_public_ip" "public_ip" {
   count                        = "${var.count}"
