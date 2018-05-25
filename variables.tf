@@ -47,6 +47,11 @@ variable "subdomain" {
     description = "The subdomain to use for public FQDN"
 }
 
+variable "os_disk_size" {
+    description = "The OS disk size in Gb"
+    default = "30"
+}
+
 variable "tags" {
     description = "List of tags should be associated on all ressoruces"
     type = "map"
