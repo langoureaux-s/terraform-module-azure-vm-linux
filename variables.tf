@@ -52,10 +52,10 @@ variable "os_disk_size" {
     default = "30"
 }
 
-variable "custom_command" {
-    type = "map"
+variable "custom_commands" {
+    type = "list"
     description = "Permit to run commands after VM installation"
-    default = {}
+    default = []
 }
 
 variable "tags" {

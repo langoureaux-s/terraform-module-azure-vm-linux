@@ -67,7 +67,7 @@ resource "azurerm_virtual_machine" "vm" {
 
 resource "azurerm_virtual_machine_extension" "custom_command" {
     count                       = "${var.count}"
-    name                        = "${lookup(var.custom_command, "name", "script")}"
+    name                        = "CustomScript"
     location                    = "${var.location}"
     resource_group_name         = "${var.rg_name}"
     virtual_machine_name        = "${element(azurerm_virtual_machine.vm.*.name, count.index)}"
@@ -78,7 +78,7 @@ resource "azurerm_virtual_machine_extension" "custom_command" {
 
     settings = <<SETTINGS
     {
-        "commandToExecute": "${join(" && ", var.custom_command["commands"])}",
+        "commandToExecute": "${join(" && ", var.custom_commands)}",
     }
 SETTINGS
 
