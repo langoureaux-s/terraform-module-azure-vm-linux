@@ -52,6 +52,12 @@ variable "os_disk_size" {
     default = "30"
 }
 
+variable "custom_commands" {
+    type = "map"
+    description = "Permit to run commands after VM installation"
+    default = {}
+}
+
 variable "tags" {
     description = "List of tags should be associated on all ressoruces"
     type = "map"
