@@ -8,7 +8,7 @@ terragrunt = {
     source = "git::https://github.com/langoureaux-s/terraform-module-azure-vm-linux.git"
   }
   
-  location = "West Europe"
+  location              = "West Europe"
   rg_name               = "bigdata"
   name                  = "master"
   size                  = "Standard_A1_v2"

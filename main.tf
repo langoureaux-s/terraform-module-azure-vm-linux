@@ -7,7 +7,7 @@ provider "azurerm" {}
 
 resource "azurerm_public_ip" "public_ip" {
   count                        = "${var.count}"
-  name                         = "public_ip_${var.name}${count.index}"
+  name                         = "vm_${var.name}${count.index}_public_ip"
   location                     = "${var.location}"
   resource_group_name          = "${var.rg_name}"
   public_ip_address_allocation = "dynamic"
@@ -17,7 +17,7 @@ resource "azurerm_public_ip" "public_ip" {
 
 resource "azurerm_network_interface" "interface" {
   count                   = "${var.count}"
-  name                    = "interface_${var.name}${count.index}"
+  name                    = "vm_${var.name}${count.index}_interface"
   location                = "${var.location}"
   resource_group_name     = "${var.rg_name}"
   internal_dns_name_label = "${var.name}${count.index}"
@@ -47,7 +47,7 @@ resource "azurerm_virtual_machine" "vm" {
     version   = "latest"
   }
   storage_os_disk {
-    name              = "disk_system_${var.name}${count.index}"
+    name              = "vm_${var.name}${count.index}_disk_system"
     caching           = "ReadWrite"
     create_option     = "FromImage"
     managed_disk_type = "Standard_LRS"
@@ -56,7 +56,7 @@ resource "azurerm_virtual_machine" "vm" {
     computer_name  = "${var.name}${count.index}"
     admin_username = "${var.admin_username}"
     admin_password = "${var.admin_password}"
-    custom_data = "${file("${var.cloudconfig_file}")}"
+    custom_data = "${var.cloudconfig_file == "" ? file("${path.module}/file/cloud-config.yml") : file("${var.cloudconfig_file")}"
   }
   os_profile_linux_config {
     disable_password_authentication = false
