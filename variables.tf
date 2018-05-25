@@ -22,9 +22,9 @@ variable "count" {
     description = "The number of VM instance should be created"
 }
 
-variable "cloudconfig_contend" {
-    description = "The cloud config contend"
-    default = "#cloud-config"
+variable "cloudconfig_file" {
+    description = "The cloud config full path file"
+    default = ""
 }
 
 variable "admin_username" {

@@ -13,9 +13,7 @@ resource "azurerm_public_ip" "public_ip" {
   resource_group_name          = "${var.rg_name}"
   public_ip_address_allocation = "dynamic"
   domain_name_label            = "${var.subdomain}-${var.name}${count.index}"
-  tags {
-    ${var.tags}
-  }
+  tags = "${var.tags}"
 }
 
 resource "azurerm_network_interface" "interface" {
@@ -31,9 +29,7 @@ resource "azurerm_network_interface" "interface" {
     private_ip_address            = "${cidrhost(var.network, count.index + var.start_ip)}"
     public_ip_address_id          = "${element(azurerm_public_ip.public_ip.*.id, count.index)}"
   }
-  tags {
-    ${var.tags}
-  }
+  tags = "${var.tags}"
 }
 
 resource "azurerm_virtual_machine" "vm" {
@@ -61,12 +57,10 @@ resource "azurerm_virtual_machine" "vm" {
     computer_name  = "${var.name}${count.index}"
     admin_username = "${var.admin_login}"
     admin_password = "${var.admin_password}"
-    custom_data = "${var.cloudconfig_contend}""
+    custom_data = "${file("${var.cloudconfig_file}")}"
   }
   os_profile_linux_config {
     disable_password_authentication = false
   }
-  tags {
-    ${var.tags}
-  }
+  tags = "${var.tags}"
 }
