@@ -78,7 +78,7 @@ resource "azurerm_virtual_machine_extension" "custom_command" {
 
     settings = <<SETTINGS
     {
-        "commandToExecute": "${join(" && ", var.custom_commands)}",
+        "commandToExecute": "ls",
     }
 SETTINGS
 
