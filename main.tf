@@ -78,7 +78,7 @@ resource "azurerm_virtual_machine_extension" "custom_command" {
 
     settings = <<SETTINGS
      {
-       "script": "{var.cloudconfig_file == "" ? base64gzip(file("${path.module}/file/custom-script.sh") : base64gzip(file(var.custom_script_path)}"
+       "script": "{var.custom_script_path == "" ? base64gzip(file("${path.module}/file/custom-script.sh")) : base64gzip(file(var.custom_script_path))}"
      }
 SETTINGS
 
