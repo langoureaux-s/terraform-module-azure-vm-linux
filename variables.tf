@@ -52,10 +52,9 @@ variable "os_disk_size" {
     default = "30"
 }
 
-variable "custom_commands" {
-    type = "list"
-    description = "Permit to run commands after VM installation"
-    default = []
+variable "custom_script_path" {
+    description = "Permit to run script after VM installation"
+    default = ""
 }
 
 variable "tags" {
