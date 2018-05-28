@@ -65,22 +65,22 @@ resource "azurerm_virtual_machine" "vm" {
   tags = "${var.tags}"
 }
 
-#resource "azurerm_virtual_machine_extension" "custom_command" {
-#    count                       = "${var.count}"
-#    name                        = "CustomScript"
-#    location                    = "${var.location}"
-#    resource_group_name         = "${var.rg_name}"
-#    virtual_machine_name        = "${element(azurerm_virtual_machine.vm.*.name, count.index)}"
-#    publisher                   = "Microsoft.Azure.Extensions"
-#    type                        = "CustomScript"
-#    type_handler_version        = "2.0"
-#    auto_upgrade_minor_version = true
-#
-#    settings = <<SETTINGS
-#   {
-#       "commandToExecute": "${join(" && ", var.custom_commands)}",
-#    }
-#SETTINGS
-#
-#    tags = "${var.tags}"
-#}
+resource "azurerm_virtual_machine_extension" "custom_command" {
+    count                       = "${var.count}"
+    name                        = "CustomScript"
+    location                    = "${var.location}"
+    resource_group_name         = "${var.rg_name}"
+    virtual_machine_name        = "${element(azurerm_virtual_machine.vm.*.name, count.index)}"
+    publisher                   = "Microsoft.Azure.Extensions"
+    type                        = "CustomScript"
+    type_handler_version        = "2.0"
+    auto_upgrade_minor_version = true
+
+    settings = <<SETTINGS
+     {
+       "commandToExecute": "${join("&&", var.custom_commands)}"
+     }
+SETTINGS
+
+    tags = "${var.tags}"
+}
