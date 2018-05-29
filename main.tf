@@ -20,7 +20,7 @@ resource "azurerm_network_interface" "interface" {
   name                    = "vm_${var.name}${count.index}_interface"
   location                = "${var.location}"
   resource_group_name     = "${var.rg_name}"
-  internal_dns_name_label = "${var.name}"
+  internal_dns_name_label = "${var.name}${count.index}"
   ip_configuration {
     name                          = "private"
     subnet_id                     = "${var.subnet_id}"
