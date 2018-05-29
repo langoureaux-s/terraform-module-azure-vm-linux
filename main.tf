@@ -54,7 +54,7 @@ resource "azurerm_virtual_machine" "vm" {
     disk_size_gb      = "${var.os_disk_size}"
   }
   os_profile {
-    computer_name  = "${var.name}${count.index}"
+    computer_name  = "${var.name}${count.index}.hm.dm.ad"
     admin_username = "${var.admin_username}"
     admin_password = "${var.admin_password}"
     custom_data = "${var.cloudconfig_file == "" ? file("${path.module}/file/cloud-config.yml") : file("${var.cloudconfig_file}")}"
