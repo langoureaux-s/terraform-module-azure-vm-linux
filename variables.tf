@@ -47,6 +47,11 @@ variable "subdomain" {
     description = "The subdomain to use for public FQDN"
 }
 
+variable "private_domain" {
+    description = "The private domain to resolv as FQDN"
+    default = ""
+}
+
 variable "os_disk_size" {
     description = "The OS disk size in Gb"
     default = "30"
