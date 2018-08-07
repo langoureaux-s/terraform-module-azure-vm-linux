@@ -57,10 +57,6 @@ variable "os_disk_size" {
     default = "30"
 }
 
-variable "custom_script_path" {
-    description = "Permit to run script after VM installation"
-    default = ""
-}
 
 variable "tags" {
     description = "List of tags should be associated on all ressoruces"
