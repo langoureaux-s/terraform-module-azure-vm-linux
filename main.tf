@@ -51,7 +51,14 @@ resource "azurerm_virtual_machine" "vm" {
     caching           = "ReadWrite"
     create_option     = "FromImage"
     managed_disk_type = "Standard_LRS"
-    disk_size_gb      = "${var.os_disk_size}"
+  }
+  storage_data_disk {
+    name              = "vm_${var.name}${count.index}_disk_data"
+    caching           = "ReadWrite"
+    create_option     = "Empty"
+    disk_size_gb      = "${var.data_disk_size}"
+    lun               = "0"
+    managed_disk_type = "Standard_LRS"
   }
   os_profile {
     computer_name  = "${var.name}${count.index}${var.private_domain == "" ? "" : ".${var.private_domain}"}"

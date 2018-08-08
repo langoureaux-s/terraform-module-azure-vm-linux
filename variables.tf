@@ -52,8 +52,8 @@ variable "private_domain" {
     default = ""
 }
 
-variable "os_disk_size" {
-    description = "The OS disk size in Gb"
+variable "data_disk_size" {
+    description = "The data disk size in Gb"
     default = "30"
 }
 
