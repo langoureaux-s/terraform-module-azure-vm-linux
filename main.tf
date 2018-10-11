@@ -64,7 +64,7 @@ resource "azurerm_virtual_machine" "vm" {
     computer_name  = "${var.name}${count.index}${var.private_domain == "" ? "" : ".${var.private_domain}"}"
     admin_username = "${var.admin_username}"
     admin_password = "${var.admin_password}"
-    custom_data    = "${var.cloudconfig_file == "" ? file("${path.module}/file/cloud-config.yml") : file("${var.cloudconfig_file}")}"
+    custom_data    = "${var.cloudconfig}"
   }
   os_profile_linux_config {
     disable_password_authentication = false
